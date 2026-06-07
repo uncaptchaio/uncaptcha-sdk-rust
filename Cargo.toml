@@ -2,6 +2,8 @@
 name = "uncaptcha"
 version = "0.1.0"
 edition = "2024"
+description = "Official uncaptcha.io wrapper made in Rust"
+repository = "https://github.com/uncaptchaio/uncaptcha-sdk-rust"
 
 [dependencies]
 bon = "3.9.1"
