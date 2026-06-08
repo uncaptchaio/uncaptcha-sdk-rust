@@ -1,7 +1,7 @@
 use serde::Serialize;
 
 use crate::{
-    api::{APIResponse, ExecuteTaskPayload, ExecuteTaskResponse},
+    api::{APIResponse, ExecuteTaskPayload, ExecuteTaskResponse, GetBalanceResponse},
     task::Task,
 };
 
@@ -62,5 +62,31 @@ impl UncaptchaAPI {
         };
 
         Ok(data.solution)
+    }
+
+    pub async fn get_balance(&self) -> Result<f64> {
+        let r = self
+            .client
+            .get("https://api.uncaptcha.io/v1/balance/get")
+            .header("X-Api-Key", &self.api_key)
+            .send()
+            .await?;
+
+        let response: APIResponse<GetBalanceResponse> = r.json().await?;
+        if !response.success {
+            let error = match response.message {
+                Some(message) => message,
+                None => unreachable!(),
+            };
+
+            return Err(errors::Error::TaskExecution(error));
+        }
+
+        let data = match response.data {
+            Some(data) => data,
+            None => unreachable!(),
+        };
+
+        Ok(data.balance)
     }
 }

@@ -16,6 +16,11 @@ pub struct ExecuteTaskPayload<T: Task + Serialize> {
 }
 
 #[derive(Deserialize)]
+pub struct GetBalanceResponse {
+    pub(crate) balance: f64,
+}
+
+#[derive(Deserialize)]
 pub struct ExecuteTaskResponse<T> {
     pub(crate) solution: T,
 }
