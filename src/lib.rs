@@ -53,7 +53,7 @@ impl UncaptchaAPI {
                 None => unreachable!(),
             };
 
-            return Err(errors::Error::TaskExecution(error));
+            return Err(errors::Error::API(error));
         }
 
         let data = match response.data {
@@ -79,7 +79,7 @@ impl UncaptchaAPI {
                 None => unreachable!(),
             };
 
-            return Err(errors::Error::TaskExecution(error));
+            return Err(errors::Error::API(error));
         }
 
         let data = match response.data {

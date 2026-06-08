@@ -3,5 +3,5 @@ pub enum Error {
     #[error("request error: {0}")]
     Request(#[from] reqwest::Error),
     #[error("task execution error: {0}")]
-    TaskExecution(String),
+    API(String),
 }
